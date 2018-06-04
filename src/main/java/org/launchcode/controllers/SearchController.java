@@ -23,5 +23,25 @@ public class SearchController {
     }
 
     // TODO #1 - Create handler to process search request and display results
+    @RequestMapping(value = "results")
+    public String search(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
+        model.addAttribute("columns", ListController.columnChoices);
+        model.addAttribute("searchType", searchType);
+        model.addAttribute("searchTerm", searchTerm);
+        int counter = 0;
+
+        if (searchType.equals("all")) {
+            counter = JobData.findByValue(searchType).size();
+            String counterNumb = Integer.toString(counter) + " Results";
+            model.addAttribute("jobs", JobData.findByValue(searchType));
+
+        } else {
+            counter = JobData.findByColumnAndValue(searchType, searchTerm).size();
+            String counterNumb = Integer.toString(counter) + " Results";
+            model.addAttribute("jobs", JobData.findByColumnAndValue(searchType, searchTerm));
+        }
+        return "search";
+
+    }
 
 }
