@@ -31,9 +31,9 @@ public class SearchController {
         int counter = 0;
 
         if (searchType.equals("all")) {
-            counter = JobData.findByValue(searchType).size();
+            counter = JobData.findByValue(searchTerm).size();
             String counterNumb = Integer.toString(counter) + " Results";
-            model.addAttribute("jobs", JobData.findByValue(searchType));
+            model.addAttribute("jobs", JobData.findByValue(searchTerm));
             model.addAttribute("counter", counter);
 
         } else {
