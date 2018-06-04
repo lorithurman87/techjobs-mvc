@@ -34,11 +34,13 @@ public class SearchController {
             counter = JobData.findByValue(searchType).size();
             String counterNumb = Integer.toString(counter) + " Results";
             model.addAttribute("jobs", JobData.findByValue(searchType));
+            model.addAttribute("counter", counter);
 
         } else {
             counter = JobData.findByColumnAndValue(searchType, searchTerm).size();
             String counterNumb = Integer.toString(counter) + " Results";
             model.addAttribute("jobs", JobData.findByColumnAndValue(searchType, searchTerm));
+            model.addAttribute("counter", counter);
         }
         return "search";
 
